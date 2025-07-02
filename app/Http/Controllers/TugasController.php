@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tugas;
 use Illuminate\Http\Request;
 
 class TugasController extends Controller
 {
+    public function data()
+    {
+        $tugas = Tugas::all();
+        return response()->json($tugas);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $title = "List Tugas";
-        return view('tugas.index', compact('title'));
+        $tugas = Tugas::all();
+        return view('tugas.index', compact('title', 'tugas'));
     }
 
     /**
@@ -28,7 +35,17 @@ class TugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'judul'=> 'required|string|max:100',
+            'deskripsi' => 'required|string|max:500',
+        ]);
+
+        Tugas::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -60,6 +77,9 @@ class TugasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tugas = Tugas::find($id);
+        $tugas->delete();
+
+        return redirect()->back();
     }
 }
