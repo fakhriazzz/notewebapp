@@ -43,7 +43,7 @@
                                         class="fa-solid fa-check"></i></button>
                                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#taskmodal"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <form action="{{ route('tugas.destroy', $t->id) }}" method="POST" class="d-inline"
+                                <form action="{{ route('tugas.destroy', $t->id_tugas) }}" method="POST" class="d-inline"
                                     onsubmit="return confirm('Yakin ingin menghapus tugas ini?')">
                                     @csrf
                                     @method('DELETE')
