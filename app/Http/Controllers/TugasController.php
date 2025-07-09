@@ -82,4 +82,19 @@ class TugasController extends Controller
 
         return redirect()->back();
     }
+
+    public function search(Request $request)
+    {
+        $query = Tugas::query();
+        $title = "List Tugas";
+
+        if($request->title != ''){
+            // $query->where('judul', $request->title);
+            $query->where('judul', 'like', '%' . $request->title . '%');
+        }
+        
+        $tugas = $query->get();
+
+        return view('tugas.index', compact('tugas', 'title'));
+    }
 }

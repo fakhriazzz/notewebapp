@@ -22,11 +22,20 @@
 @endpush
 @section('content')
     <div class="input-group my-3">
-        <input type="text" class="form-control" id="key" placeholder="Cari Tugas" aria-label="Cari Tugas"
-            aria-describedby="button-addon2">
-        <button class="btn btn-success" type="button" id="button-tambah" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">Tambah</button>
+        <form method="POST" action="{{ route('tugas.search') }}">
+            @csrf
+            <div class="row my-1 g-2">
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Cari Tugas">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-success w-100" type="submit">Cari</button>
+                </div>
+            </div>
+        </form>
     </div>
+    <button class="btn btn-primary mb-2" type="button" id="button-tambah" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Tambah</button>
     @includeIf('tugas.modal')
     @includeIf('tugas.detail-tugas')
     <div class="list" id="container-list">
